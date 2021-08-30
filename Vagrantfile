@@ -17,7 +17,7 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu fo
 apt-get update
 apt install docker-ce -y
 systemctl status docker
-usermod -aG docker ${USER}
+# groupadd docker && usermod -aG docker ${USER}
 SCRIPT
 
 $dockerir=<<SCRIPT
@@ -30,9 +30,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     foobar.vm.hostname = "foobar-server"
     foobar.vm.network :private_network, ip: "192.168.33.10"
     foobar.vm.provider "virtualbox" do |vb|
-     vb.customize ["modifyvm", :id, "--memory", "1024"]
+     vb.customize ["modifyvm", :id, "--memory", ENV['MEMORY']]
     end
+    config.env.enable
     foobar.vm.provision :shell, inline: $bootstrap
-    foobar.vm.provision :shell, inline: $dockerir
+
+    if (ENV['CONNECT_FROM_IRAN'] == 'true')
+      foobar.vm.provision :shell, inline: $dockerir
+    end
   end
 end

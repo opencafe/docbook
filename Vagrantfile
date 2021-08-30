@@ -17,7 +17,7 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu fo
 apt-get update
 apt install docker-ce -y
 systemctl status docker
-# groupadd docker && usermod -aG docker ${USER}
+groupadd docker && usermod -aG docker ${USER}
 SCRIPT
 
 $dockerir=<<SCRIPT

@@ -5,16 +5,17 @@
 VAGRANTFILE_API_VERSION = "2"
 
 $bootstrap=<<SCRIPT
+export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt install apt-transport-https \
+apt-get install apt-transport-https \
             ca-certificates \
             curl \
-            software-properties-common
-            
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-apt update
-apt-cache policy docker-ce
+apt-get update
+apt install docker-ce -y
 systemctl status docker
 usermod -aG docker ${USER}
 SCRIPT

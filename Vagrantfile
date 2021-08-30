@@ -12,7 +12,7 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "foobar-server" do |foobar|
-    foobar.vm.box = "ubuntu/20.04"
+    foobar.vm.box = "ubuntu:20.04"
     foobar.vm.hostname = "foobar-server"
     #foobar.vm.network :private_network, ip: "192.168.33.10"
     foobar.vm.provider "virtualbox" do |vb|

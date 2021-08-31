@@ -43,5 +43,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       foobar.vm.provision :docker
       foobar.vm.provision :docker_compose, yml: "/vagrant/services/wordpress/docker-compose.yml", rebuild: true, run: "always"
     end
+
+    if(ENV['SERVICE_LARAVEL'] == 'true')
+      foobar.vm.provision :docker
+      foobar.vm.provision :docker_compose, yml: "/vagrant/services/laravel/docker-compose.yml", rebuild: true, run: "always"
+    end
   end
 end

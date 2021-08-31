@@ -38,5 +38,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if (ENV['CONNECT_FROM_IRAN'] == 'true')
       foobar.vm.provision :shell, inline: $dockerir
     end
+
+    if(ENV['SERVICE_WORDPRESS'] == 'true')
+      foobar.vm.provision :docker
+      foobar.vm.provision :docker_compose, yml: "/vagrant/services/wordpress/docker-compose.yml", rebuild: true, run: "always"
+    end
   end
 end

@@ -23,5 +23,5 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./:/app
+      - ./files/:/app
     # privileged: true # Privileged mode could be required to run this container under Windows
